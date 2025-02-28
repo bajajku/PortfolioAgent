@@ -3,36 +3,31 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import os
 import uvicorn
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from Models.agent import PortfolioAgent
+from Models.llm import LLM
 import dotenv
 
 # Load environment variables
 dotenv.load_dotenv()
 
 # Check environment variables
-HF_API_KEY = os.environ.get("HF_API_KEY")
-REPO_ID = os.environ.get("REPO_ID")
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
+MODEL_NAME = os.environ.get("MODEL_NAME", "deepseek/deepseek-r1")
 RESUME_PATH = os.environ.get("RESUME_PATH", "resume.pdf")
 
-if not HF_API_KEY:
-    raise EnvironmentError("Missing environment variable: HF_API_KEY")
-if not REPO_ID:
-    raise EnvironmentError("Missing environment variable: REPO_ID")
+if not OPENROUTER_API_KEY:
+    raise EnvironmentError("Missing environment variable: OPENROUTER_API_KEY")
 
 # Initialize the LLM
-llm = HuggingFaceEndpoint(
-    repo_id=REPO_ID,
-    task="text-generation",
-    max_new_tokens=512,
+llm_wrapper = LLM(
+    model_name=MODEL_NAME,
+    api_key=OPENROUTER_API_KEY,
     temperature=0.7,
-    top_k=50,
-    top_p=0.95,
-    repetition_penalty=1.03,
-    huggingfacehub_api_token=HF_API_KEY
+    streaming=True,
+    base_url="https://openrouter.ai/api/v1"
 )
 
-chat = ChatHuggingFace(llm=llm, verbose=True)
+chat = llm_wrapper.create_chat()
 
 # Initialize the agent
 agent = PortfolioAgent(chat, RESUME_PATH)

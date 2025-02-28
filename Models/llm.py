@@ -1,38 +1,34 @@
-from langchain_huggingface import HuggingFaceEndpoint, ChatHuggingFace
+from langchain_openai import ChatOpenAI
 
 
 class LLM:
 
-    def __init__(self, repo_id: str, api_token: str, **kwargs):
+    def __init__(self, model_name: str, api_key: str, **kwargs):
         """
-        Initialize the Hugging Face API client with custom parameters.
+        Initialize the OpenRouter API client with custom parameters.
         
         Args:
-            repo_id (str): The Hugging Face model repository ID.
-            api_token (str): The Hugging Face Hub API token.
-            **kwargs: Additional parameters for Hugging Face configuration.
+            model_name (str): The model identifier (e.g., "deepseek/deepseek-r1")
+            api_key (str): The OpenRouter API token
+            **kwargs: Additional parameters for configuration
         """
-        self.repo_id = repo_id
-        self.api_token = api_token
+        self.model_name = model_name
+        self.api_key = api_key
         self.config = {
-            'max_new_tokens': kwargs.get('max_new_tokens', 512),
-            'top_k': kwargs.get('top_k', 10),
-            'top_p': kwargs.get('top_p', 0.95),
-            'temperature': kwargs.get('temperature', 0.2),
-            'repetition_penalty': kwargs.get('repetition_penalty', 1.03),
+            'temperature': kwargs.get('temperature', 0.7),
+            'model': model_name,
             'streaming': kwargs.get('streaming', True),
-            'task': kwargs.get('task', 'text-generation')
+            'base_url': kwargs.get('base_url', "https://openrouter.ai/api/v1")
         }
         self.client = self.create_llm()
 
 
     def create_llm(self):
-        """Set up the Hugging Face API endpoint."""
-        return HuggingFaceEndpoint(
+        """Set up the OpenRouter API endpoint."""
+        return ChatOpenAI(
             **self.config,
-            repo_id=self.repo_id,
-            huggingfacehub_api_token=self.api_token
+            api_key=self.api_key
         )
     
     def create_chat(self):
-        return ChatHuggingFace(llm=self.client, verbose=True)
+        return self.client

@@ -10,6 +10,7 @@ from Models.tools.project_tool import ProjectInfoTool
 from Models.tools.contact_tool import ContactInfoTool
 from Models.tools.skills_tool import SkillsAssessmentTool
 from utils.pdf_loader import ResumeProcessor
+from langgraph.graph import START
 
 class PortfolioAgent:
     def __init__(self, llm, resume_path: str):
@@ -52,6 +53,9 @@ class PortfolioAgent:
         # Add nodes
         builder.add_node("agent", self._agent_node)
         builder.add_node("tools", ToolNode(self.tools))
+        
+        # Add edge from START to agent
+        builder.add_edge(START, "agent")  # Add this line to define the entry point
         
         # Add edges
         builder.add_edge("agent", "tools")
