@@ -2,10 +2,10 @@ from langchain_core.messages import ToolMessage
 from langchain_core.runnables import RunnableLambda
 from langgraph.prebuilt import ToolNode
 
-from Models.tools.resume_tool import ResumeSearchTool
-from Models.tools.project_tool import ProjectInfoTool
-from Models.tools.contact_tool import ContactInfoTool
-from Models.tools.skills_tool import SkillsAssessmentTool
+from Models.tools.resume_tool import search_resume
+from Models.tools.project_tool import get_project_details
+from Models.tools.contact_tool import get_contact_info
+from Models.tools.skills_tool import assess_skills_for_role
 from Models.state import State
 def handle_tool_error(state) -> dict:
     """
@@ -50,10 +50,10 @@ def create_tool_node_with_fallback(tools: list) -> dict:
         exception_key="error"  # Specify that this fallback is for handling errors
     )
 tools_names = {
-    "search_resume": ResumeSearchTool().search_resume,
-    "get_project_details": ProjectInfoTool().get_project_details,
-    "get_contact_info": ContactInfoTool().get_contact_info,
-    "assess_skills_for_role": SkillsAssessmentTool().assess_skills_for_role
+    "search_resume": search_resume,
+    "get_project_details": get_project_details,
+    "get_contact_info": get_contact_info,
+    "assess_skills_for_role": assess_skills_for_role
 }
 def execute_tools(state: State):
     tool_calls = state['messages'][-1].tool_calls

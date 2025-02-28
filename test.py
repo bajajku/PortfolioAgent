@@ -19,6 +19,8 @@ from langchain_core.messages import ToolMessage
 from langchain_core.messages import HumanMessage
 from langchain_core.tools import tool
 
+from utils.text_loader import load_and_process_text
+
 def test_basic_query():
     dotenv.load_dotenv()
     
@@ -37,16 +39,37 @@ def test_basic_query():
         - LinkedIn: https://ca.linkedin.com/in/kunal-bajaj1
         - GitHub: https://github.com/bajajku
         """
-
+    @tool
+    def search_resume(query: str) -> str:
+        """
+        Search Kunal's resume for information related to the query.
+        
+        Args:
+            query: The question or search term about Kunal's professional background.
+            
+        Returns:
+            str: Relevant information from Kunal's resume.
+        """
+        # Get relevant documents
+        docs = load_and_process_text().get_relevant_documents(query)
+        
+        if not docs:
+            return "I couldn't find specific information about that in Kunal's resume."
+        
+        # Combine the content from relevant documents
+        results = "\n\n".join([doc.page_content for doc in docs])
+        print(f"Results: {results}")
+        return f"Found the following information in Kunal's resume:\n\n{results}"
 
     if not os.environ.get("MISTRAL_API_KEY"):
         os.environ["MISTRAL_API_KEY"] = getpass.getpass("Enter API key for Mistral AI: ")
 
     from langchain.chat_models import init_chat_model
-    tools = [get_contact_info]
+    tools = [get_contact_info, search_resume]
     model = init_chat_model("mistral-large-2411", model_provider="mistralai")
     tools_names = {
-    "get_contact_info": get_contact_info
+    "get_contact_info": get_contact_info,
+    "search_resume": search_resume
     }
 
     def execute_tools(state: State):
@@ -108,7 +131,7 @@ def test_basic_query():
     #     messages = graph.invoke({"messages": [{"role": "user", "content": query}]})
     #     print(f"Messages: {messages}")
         
-    messages = [HumanMessage(content="What is Kunal's contact information?")]
+    messages = [HumanMessage(content="What is Kunal's education background?")]
     result = graph.invoke({"messages": messages})
     print(result)
 
