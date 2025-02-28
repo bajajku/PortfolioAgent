@@ -1,0 +1,29 @@
+from typing import Dict, List, Optional
+from langchain_core.tools import tool
+from utils.pdf_loader import ResumeProcessor
+
+class ResumeSearchTool:
+    def __init__(self, resume_processor: ResumeProcessor):
+        self.resume_processor = resume_processor
+        self.retriever = resume_processor.get_retriever()
+        
+    @tool
+    def search_resume(self, query: str) -> str:
+        """
+        Search Kunal's resume for information related to the query.
+        
+        Args:
+            query: The question or search term about Kunal's professional background.
+            
+        Returns:
+            str: Relevant information from Kunal's resume.
+        """
+        # Get relevant documents
+        docs = self.retriever.get_relevant_documents(query)
+        
+        if not docs:
+            return "I couldn't find specific information about that in Kunal's resume."
+        
+        # Combine the content from relevant documents
+        results = "\n\n".join([doc.page_content for doc in docs])
+        return f"Found the following information in Kunal's resume:\n\n{results}"
