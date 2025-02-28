@@ -23,6 +23,6 @@ When you don't know the answer or can't find specific information, be honest abo
 AGENT_PROMPT = ChatPromptTemplate.from_messages(
     [
         ("system", SYSTEM_PROMPT),
-        ("placeholder", "{messages}"),
+        ("placeholder", "{messages}")
     ]
 )

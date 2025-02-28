@@ -1,10 +1,9 @@
 from langchain_core.tools import tool
-from utils.pdf_loader import ResumeProcessor
+from utils.text_loader import load_and_process_text
 
 class SkillsAssessmentTool:
-    def __init__(self, resume_processor: ResumeProcessor):
-        self.resume_processor = resume_processor
-        self.retriever = resume_processor.get_retriever()
+    def __init__(self):
+        self.retriever = load_and_process_text()
         
     @tool
     def assess_skills_for_role(self, role_description: str) -> str:

@@ -16,3 +16,4 @@ class ContactInfoTool:
         - LinkedIn: https://ca.linkedin.com/in/kunal-bajaj1
         - GitHub: https://github.com/bajajku
         """
+    

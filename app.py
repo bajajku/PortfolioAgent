@@ -27,10 +27,8 @@ llm_wrapper = LLM(
     base_url="https://openrouter.ai/api/v1"
 )
 
-chat = llm_wrapper.create_chat()
-
 # Initialize the agent
-agent = PortfolioAgent(chat, RESUME_PATH)
+agent = PortfolioAgent(llm_wrapper, RESUME_PATH)
 
 # Initialize FastAPI app
 app = FastAPI(title="Kunal's Portfolio Assistant API")

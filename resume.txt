@@ -1,0 +1,82 @@
+
+
+Kunal Bajaj437-269-7678 #kunalbajaj20220@gmail.com ïlinkedin.com/in/kunal-bajaj1 §github.com/bajajku
+lbajajku-portfolio/
+
+Education
+Sheridan College September 2022 – December 2026
+Honours Bachelor of Computer Science (Mobile Computing) Oakville, ON
+
+•GPA: 3.71
+•Courses: Software Engineering, Software Design, Web Application Design and Implementation, Operating
+Systems, Computer Architecture, Data Structures and Algorithms, Advanced Mobile Application Development
+
+Experience
+Software Developer January 2024 – Present
+Korah Limited Remote
+•Continuing development of FindMyBed Project, focusing on feature enhancement, performance optimization,
+and user experience improvements.
+
+AI and Process Optimization Analyst September 2024 – December 2024
+Korah Limited Oakville, ON
+•Developed and implemented State Machine-based AI algorithms in Python, processing 700+ yearly NICU
+bed predictions with 90% accuracy, reducing decision time by 35%.
+•Built responsive frontend simulation using Python’s Pygame library to visualize patient transfers, improving
+operational tracking by 40%.
+•Facilitated 15+ requirement gathering sessions with healthcare professionals, achieving 95% stakeholder
+satisfaction and implementing 25+ critical system improvements based on operational feedback.
+
+Artificial Intelligence Research Assistant October 2023 – September 2024
+Sheridan Centre for Applied AI (CAAI) Oakville, ON
+•Implemented advanced NLP algorithms using Transformers and LangChain, developing a chatbot that
+processed 1000+ monthly queries with 90% accuracy and reduced response time by 45%.
+•Engineered a Retrieval-Augmented Generation (RAG) system using FastAPI backend, handling 150+
+concurrent requests and improving query resolution speed by 80% while maintaining 99.9% uptime.
+•Engineered dynamic and context-aware prompts, leveraging few-shot learning, and chain-of-thought
+prompting to improve response relevance and coherence by 20%, eliminating the need for model retraining.
+
+Software Developer May 2024 – August 2024
+Sheridan Centre for Applied AI (CAAI) Oakville, ON
+•Engineered a communication layer for wearable sensors using Arduino IDE and C++ for ESP32 hardware
+and Node.js for backend integration, improving data transfer speed by 20%.
+•Designed and optimized a MongoDB database hosted on AWS Cloud for real-time analytics, increasing query
+efficiency by 25%.
+•Developed a responsive ReactJS frontend dashboard, processing real-time data from 50+ sensors
+simultaneously with 99% uptime and reducing system monitoring time by 30%.
+
+Projects
+Vercel Clone - Fullstack Application |GitHub ReactJS |Node.js |Express.js |AWS
+•Developed a scalable Vercel-like deployment platform using React, Node.js, and ExpressJS, reducing app
+deployment time by 40% through automated pipelines.
+•Implemented scalable file management system using AWS S3 and Redis queues, handling deployment packages
+with 95% reliability and achieving consistent response times for file operations.
+•Engineered comprehensive REST APIs, achieving 95% test coverage through Jest and maintaining
+cross-browser compatibility across Chrome, Firefox, and Safari with 98% performance consistency.
+
+Online music streaming platform |GitHub C# |ASP.NET |EntityFramework |REST API
+•Built an online music streaming app using C# ASP.NET Framework, integrating Spotify’s API to manage
+search and recommendation features.
+•Implemented secure user authentication system using ASP.NET Identity Framework and optimized data
+persistence with SQL Server for song metadata storage, reducing API calls by 30%.
+
+Groovify - iOS App |GitHub Swift |SwiftUI |Firebase |LLM
+•Built an iOS music recommendation app using Swift and SwiftUI, integrating Spotify’s API to analyze user
+listening patterns and generate mood-based recommendations with 85% accuracy.
+•Implemented Firebase authentication for secure user login and efficient local storage using CoreData for song
+metadata, reducing API calls by 30%.
+•Developed an AI-powered recommendation engine using open-source emotion detection model from
+HuggingFace, maintaining 95% recommendation accuracy.
+
+Efootball Regression Project |GitHub Python |Tensorflow |Sci-Kit Learn |Pandas
+•Engineered Python web scraping scripts using BeautifulSoup and Selenium to extract 1000+ player
+statistics across 15+ performance metrics, achieving 98% data collection accuracy.
+•Implemented data preprocessing pipeline using pandas and scikit-learn, cleaning 20+ features and reducing
+missing values from 15% to <1%, resulting in a high-quality dataset for model training.
+•Developed a linear regression model using TensorFlow to predict player ratings for different positions, with
+90% accuracy, reducing prediction error by 25% through feature selection and model optimization.
+
+Technical Skills
+Languages: C#, JavaScript (ES6), Python, SQL, C/C++, Swift
+Frameworks and Libraries: ASP.NET, ReactJS (Redux, Jest), Node.js, ExpressJS, FastAPI, Docker, SwiftUI
+Developer Tools: Git (Command Line, GitHub/GitLab workflow), Postman, AWS (EC2, S3), Firebase, CI/CD
+Database and Caching: MongoDB, SQL Server, PostgreSQL, Milvus, Redis

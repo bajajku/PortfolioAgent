@@ -1,11 +1,10 @@
 from typing import Dict, List, Optional
 from langchain_core.tools import tool
 from utils.pdf_loader import ResumeProcessor
-
+from utils.text_loader import load_and_process_text
 class ResumeSearchTool:
-    def __init__(self, resume_processor: ResumeProcessor):
-        self.resume_processor = resume_processor
-        self.retriever = resume_processor.get_retriever()
+    def __init__(self):
+        self.retriever = load_and_process_text()
         
     @tool
     def search_resume(self, query: str) -> str:
@@ -26,4 +25,5 @@ class ResumeSearchTool:
         
         # Combine the content from relevant documents
         results = "\n\n".join([doc.page_content for doc in docs])
+        print(f"Results: {results}")
         return f"Found the following information in Kunal's resume:\n\n{results}"
