@@ -1,5 +1,5 @@
 from langchain_core.tools import tool
-from utils.text_loader import load_and_process_text
+from utils.retriever import global_retriever
 
 @tool
 def get_project_details(project_name: str) -> str:
@@ -13,7 +13,7 @@ def get_project_details(project_name: str) -> str:
         str: Detailed information about the specified project.
     """
     # Search with project name as query
-    docs = load_and_process_text().get_relevant_documents(project_name)
+    docs = global_retriever.get_relevant_documents(project_name)
     
     if not docs:
         return f"I couldn't find information about a project called '{project_name}' in Kunal's portfolio."

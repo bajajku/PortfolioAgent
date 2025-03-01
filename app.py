@@ -15,6 +15,7 @@ from Models.tools.project_tool import get_project_details
 from Models.tools.contact_tool import get_contact_info
 from Models.tools.skills_tool import assess_skills_for_role
 from langgraph.graph import StateGraph, START, END
+from utils.retriever import global_retriever
 
 # Load environment variables
 dotenv.load_dotenv()
@@ -22,6 +23,7 @@ dotenv.load_dotenv()
 if not os.environ.get("MISTRAL_API_KEY"):
     os.environ["MISTRAL_API_KEY"] = getpass.getpass("Enter API key for Mistral AI: ")
 
+# Ensure retriever is initialized once at application startup
 from langchain.chat_models import init_chat_model
 tools = [get_contact_info, search_resume, get_project_details, assess_skills_for_role]
 model = init_chat_model("mistral-large-2411", model_provider="mistralai")
@@ -102,6 +104,8 @@ async def chat_endpoint(query: QueryRequest):
         # Use the graph instead of agent
         messages = [HumanMessage(content=query.question)]
         result = graph.invoke({"messages": messages})
+
+        print(result)
         
         # Extract the assistant's response
         assistant_responses = [msg.content for msg in result["messages"] if msg.type == "ai"]

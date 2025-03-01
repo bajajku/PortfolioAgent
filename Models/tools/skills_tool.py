@@ -1,5 +1,5 @@
 from langchain_core.tools import tool
-from utils.text_loader import load_and_process_text
+from utils.retriever import global_retriever
 
 
 @tool
@@ -14,7 +14,7 @@ def assess_skills_for_role(role_description: str) -> str:
         str: Assessment of how Kunal's skills match the requirements.
     """
     # Get skills section
-    docs = load_and_process_text().get_relevant_documents("technical skills experience")
+    docs = global_retriever.get_relevant_documents("technical skills experience")
     
     if not docs:
         return "I couldn't find detailed skills information in Kunal's resume."
@@ -22,7 +22,7 @@ def assess_skills_for_role(role_description: str) -> str:
     skills_info = "\n\n".join([doc.page_content for doc in docs])
     
     # Now look for matches with the requested role
-    role_matches = load_and_process_text().get_relevant_documents(role_description)
+    role_matches = global_retriever.get_relevant_documents(role_description)
     
     role_matches_text = "\n\n".join([doc.page_content for doc in role_matches]) if role_matches else ""
     

@@ -1,10 +1,9 @@
 from typing import Dict, List, Optional
 from langchain_core.tools import tool
-from utils.pdf_loader import ResumeProcessor
-from utils.text_loader import load_and_process_text
+from utils.retriever import global_retriever
 
 @tool
-def search_resume( query: str) -> str:
+def search_resume(query: str) -> str:
     """
     Search Kunal's resume for information related to the query.
     
@@ -15,7 +14,7 @@ def search_resume( query: str) -> str:
         str: Relevant information from Kunal's resume.
     """
     # Get relevant documents
-    docs = load_and_process_text().get_relevant_documents(query)
+    docs = global_retriever.get_relevant_documents(query)
     
     if not docs:
         return "I couldn't find specific information about that in Kunal's resume."
