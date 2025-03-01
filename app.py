@@ -26,7 +26,7 @@ if not os.environ.get("MISTRAL_API_KEY"):
 # Ensure retriever is initialized once at application startup
 from langchain.chat_models import init_chat_model
 tools = [get_contact_info, search_resume, get_project_details, assess_skills_for_role]
-model = init_chat_model("mistral-large-2411", model_provider="mistralai")
+model = init_chat_model(os.environ.get("MISTRAL_MODEL"), model_provider="mistralai")
 tools_names = {
 "get_contact_info": get_contact_info,
 "search_resume": search_resume,
@@ -73,13 +73,6 @@ builder.set_entry_point("assistant")
 
 graph = builder.compile()
     
-# messages = [HumanMessage(content="What is Kunal's education background?")]
-# result = graph.invoke({"messages": messages})
-# print(result)
-
-
-# # Initialize the agent
-# # agent = PortfolioAgent(llm_wrapper, RESUME_PATH)
 
 # Initialize FastAPI app
 app = FastAPI(title="Kunal's Portfolio Assistant API")
