@@ -10,7 +10,7 @@ def load_and_process_text():
     loader = TextLoader(DATA_FILE)
     documents = loader.load()
 
-    text_splitter = CharacterTextSplitter(chunk_size=1500, chunk_overlap=350)
+    text_splitter = CharacterTextSplitter(chunk_size=300, chunk_overlap=100)
     texts = text_splitter.split_documents(documents)
 
     # 3. Create embeddings and a vector store

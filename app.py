@@ -16,7 +16,6 @@ from Models.tools.contact_tool import get_contact_info
 from Models.tools.skills_tool import assess_skills_for_role
 from langgraph.graph import StateGraph, START, END
 from utils.retriever import global_retriever
-
 # Load environment variables
 dotenv.load_dotenv()
 
@@ -26,7 +25,7 @@ if not os.environ.get("MISTRAL_API_KEY"):
 # Ensure retriever is initialized once at application startup
 from langchain.chat_models import init_chat_model
 tools = [get_contact_info, search_resume, get_project_details, assess_skills_for_role]
-model = init_chat_model(os.environ.get("MISTRAL_MODEL"), model_provider="mistralai")
+model = init_chat_model(os.environ.get("MISTRAL_MODEL"), model_provider="mistralai", temperature=0.7, max_tokens=200, timeout=10, max_retries=3)
 tools_names = {
 "get_contact_info": get_contact_info,
 "search_resume": search_resume,

@@ -14,12 +14,11 @@ def search_resume(query: str) -> str:
         str: Relevant information from Kunal's resume.
     """
     # Get relevant documents
-    docs = global_retriever.get_relevant_documents(query)
+    docs = global_retriever.get_relevant_documents(query, k=2)
     
     if not docs:
         return "I couldn't find specific information about that in Kunal's resume."
     
     # Combine the content from relevant documents
     results = "\n\n".join([doc.page_content for doc in docs])
-    print(f"Results: {results}")
     return f"Found the following information in Kunal's resume:\n\n{results}"
